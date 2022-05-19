@@ -1,7 +1,8 @@
 public class Tile {
 
     // Attributes
-    char state;
+    String state;
+    boolean isFlag;
     boolean isMine;
     boolean isHidden;
     int numOfMinesNearby;
@@ -17,26 +18,27 @@ public class Tile {
     public void checkState(){
 
         if(isHidden){
-            setState('-');
+            setState("-");
         }
 
         if(isMine){
-            setState('*');
+            setState("*");
         }
-        else{
-            setState((char)getNumOfMinesNearby());
+
+        if(isFlag){
+            setState("F");
         }
     }
 
-    public char getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(char state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public boolean isMine() {
+    public boolean getIsMine() {
         return isMine;
     }
 
@@ -44,12 +46,20 @@ public class Tile {
         isMine = mine;
     }
 
-    public boolean isHidden() {
+    public boolean getIsHidden() {
         return isHidden;
     }
 
     public void setIsHidden(boolean hidden) {
         isHidden = hidden;
+    }
+
+    public boolean getIsFlag(){
+        return isFlag;
+    }
+
+    public void setIsFlag(boolean isFlag){
+        this.isFlag = isFlag;
     }
 
     public int getNumOfMinesNearby() {
