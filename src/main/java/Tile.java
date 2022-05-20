@@ -16,7 +16,6 @@ public class Tile {
 
     // Methods
     public void checkState(){
-
         if(isHidden){
             setState("-");
         }
@@ -30,20 +29,12 @@ public class Tile {
         }
     }
 
-    public String getState() {
-        return state;
-    }
-
     public void setState(String state) {
         this.state = state;
     }
 
     public boolean getIsMine() {
         return isMine;
-    }
-
-    public void setMine(boolean mine) {
-        isMine = mine;
     }
 
     public boolean getIsHidden() {

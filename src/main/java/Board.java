@@ -7,23 +7,21 @@ public class Board {
     int numOfMines;
     Game game = new Game();
 
-    int numOfFlags;
-
     // Constructor
     public Board(int difficulty) {
         this.difficulty = difficulty;
 
         if(difficulty == 1){
             this.size = 5;
-            this.numOfMines= 2;
+            this.numOfMines= 5;
         }
         else if(difficulty == 2){
             this.size = 7;
-            this.numOfMines= 3;
+            this.numOfMines= 24;
         }
         else{
             this.size = 9;
-            this.numOfMines= 5;
+            this.numOfMines= 45;
         }
         this.board = new Tile[size][size];
         fillBoard();
@@ -35,12 +33,14 @@ public class Board {
     // Methods
     public void generateMines(){
 
+        Tile blankMine = new Tile(true, true);
+
         for(int i = 0; i < numOfMines; i++){
 
             int rand1 = (int)(Math.random() * size-1);
             int rand2 = (int)(Math.random() * size-1);
 
-            if (board[rand1][rand2] != new Tile(true, true)){
+            if (board[rand1][rand2] != blankMine){
                 board[rand1][rand2] = new Tile(true,true);
             }
         }
@@ -52,7 +52,7 @@ public class Board {
             for (int j = 0; j < board[i].length; j++)
             {
                 if(board[i][j] == null){
-                    board[i][j] = new Tile(false, true); //Whatever value you want to set them to
+                    board[i][j] = new Tile(false, true);
                 }
             }
         }
@@ -64,32 +64,41 @@ public class Board {
 
             if(k== 0){
                 System.out.print("    ");
-            }else if(k == size){
+
+            }
+            else if(k == size){
                 System.out.print("\033[4m" + k + "\033[0m  ");
             }
             else{
                 System.out.print("\033[4m" + k + "  ");
             }
+
         }
         System.out.println();
 
         for (int i = 0; i < board.length; i++)
         {
             System.out.print( i+1 +"|  ");
+
             for (int j = 0; j < board[i].length; j++)
             {
+
                 if(!board[i][j].isHidden){
 
                     if (board[i][j].state == "-"){
                         System.out.print(board[i][j].getNumOfMinesNearby() + "  ");
-                    }else{
+                    }
+                    else{
                         System.out.print(board[i][j].state + "  ");
                     }
-                    }
+
+                }
                 else{
                     System.out.print("-" + "  ");
                 }
+
             }
+
             System.out.println();
         }
     }
