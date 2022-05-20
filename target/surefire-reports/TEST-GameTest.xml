@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="GameTest" time="0.086" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="GameTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="18.0.1.1+2-6"/>
@@ -61,8 +61,8 @@
     <property name="sun.stdout.encoding" value="cp850"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="GameTest" name="GameTest.testGetCorrectFlags" time="0.086"/>
+  <testcase classname="GameTest" name="GameTest.testGetCorrectFlags" time="0"/>
   <testcase classname="GameTest" name="GameTest.testSetCorrectFlags" time="0"/>
-  <testcase classname="GameTest" name="GameTest.testSetGameStatus" time="0"/>
   <testcase classname="GameTest" name="GameTest.testGetGameStatus" time="0"/>
+  <testcase classname="GameTest" name="GameTest.testSetGameStatus" time="0"/>
 </testsuite>

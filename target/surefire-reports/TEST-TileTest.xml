@@ -63,11 +63,11 @@
   </properties>
   <testcase classname="TileTest" name="TileTest.testSetNumOfMinesNearby" time="0"/>
   <testcase classname="TileTest" name="TileTest.testGetNumOfMinesNearby" time="0"/>
-  <testcase classname="TileTest" name="TileTest.testGetIsFlag" time="0"/>
-  <testcase classname="TileTest" name="TileTest.testSetIsFlag" time="0"/>
-  <testcase classname="TileTest" name="TileTest.testSetIsHidden" time="0"/>
   <testcase classname="TileTest" name="TileTest.testGetIsHidden" time="0"/>
-  <testcase classname="TileTest" name="TileTest.testCheckState" time="0"/>
+  <testcase classname="TileTest" name="TileTest.testGetIsFlag" time="0"/>
   <testcase classname="TileTest" name="TileTest.testSetState" time="0"/>
+  <testcase classname="TileTest" name="TileTest.testSetIsFlag" time="0"/>
   <testcase classname="TileTest" name="TileTest.testGetIsMine" time="0"/>
+  <testcase classname="TileTest" name="TileTest.testSetIsHidden" time="0"/>
+  <testcase classname="TileTest" name="TileTest.testCheckState" time="0"/>
 </testsuite>
