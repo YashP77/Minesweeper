@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Minesweeper</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">public class Board {
+
+    // Attributes
+    int size;
+    Tile[][] board;
+    int difficulty;
+    int numOfMines;
+<span class="nc" id="L8">    Game game = new Game();</span>
+
+    // Constructor
+<span class="nc" id="L11">    public Board(int difficulty) {</span>
+<span class="nc" id="L12">        this.difficulty = difficulty;</span>
+
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if(difficulty == 1){</span>
+<span class="nc" id="L15">            this.size = 5;</span>
+<span class="nc" id="L16">            this.numOfMines= 5;</span>
+        }
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        else if(difficulty == 2){</span>
+<span class="nc" id="L19">            this.size = 7;</span>
+<span class="nc" id="L20">            this.numOfMines= 24;</span>
+        }
+        else{
+<span class="nc" id="L23">            this.size = 9;</span>
+<span class="nc" id="L24">            this.numOfMines= 45;</span>
+        }
+<span class="nc" id="L26">        this.board = new Tile[size][size];</span>
+<span class="nc" id="L27">        fillBoard();</span>
+<span class="nc" id="L28">        generateMines();</span>
+<span class="nc" id="L29">        print();</span>
+<span class="nc" id="L30">        nearbyMineUpdate();</span>
+<span class="nc" id="L31">    }</span>
+
+    // Methods
+    public void generateMines(){
+
+<span class="nc" id="L36">        Tile blankMine = new Tile(true, true);</span>
+
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        for(int i = 0; i &lt; numOfMines; i++){</span>
+
+<span class="nc" id="L40">            int rand1 = (int)(Math.random() * size-1);</span>
+<span class="nc" id="L41">            int rand2 = (int)(Math.random() * size-1);</span>
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (board[rand1][rand2] != blankMine){</span>
+<span class="nc" id="L44">                board[rand1][rand2] = new Tile(true,true);</span>
+            }
+        }
+<span class="nc" id="L47">    }</span>
+
+    public void fillBoard(){
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        for (int i = 0; i &lt; board.length; i++)</span>
+        {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            for (int j = 0; j &lt; board[i].length; j++)</span>
+            {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                if(board[i][j] == null){</span>
+<span class="nc" id="L55">                    board[i][j] = new Tile(false, true);</span>
+                }
+            }
+        }
+<span class="nc" id="L59">    }</span>
+
+    public void print(){
+
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        for(int k = 0; k &lt; size+ 1; k++){</span>
+
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if(k== 0){</span>
+<span class="nc" id="L66">                System.out.print(&quot;    &quot;);</span>
+
+            }
+<span class="nc bnc" id="L69" title="All 2 branches missed.">            else if(k == size){</span>
+<span class="nc" id="L70">                System.out.print(&quot;\033[4m&quot; + k + &quot;\033[0m  &quot;);</span>
+            }
+            else{
+<span class="nc" id="L73">                System.out.print(&quot;\033[4m&quot; + k + &quot;  &quot;);</span>
+            }
+
+        }
+<span class="nc" id="L77">        System.out.println();</span>
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        for (int i = 0; i &lt; board.length; i++)</span>
+        {
+<span class="nc" id="L81">            System.out.print( i+1 +&quot;|  &quot;);</span>
+
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            for (int j = 0; j &lt; board[i].length; j++)</span>
+            {
+
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                if(!board[i][j].isHidden){</span>
+
+<span class="nc bnc" id="L88" title="All 2 branches missed.">                    if (board[i][j].state == &quot;-&quot;){</span>
+<span class="nc" id="L89">                        System.out.print(board[i][j].getNumOfMinesNearby() + &quot;  &quot;);</span>
+                    }
+                    else{
+<span class="nc" id="L92">                        System.out.print(board[i][j].state + &quot;  &quot;);</span>
+                    }
+
+                }
+                else{
+<span class="nc" id="L97">                    System.out.print(&quot;-&quot; + &quot;  &quot;);</span>
+                }
+
+            }
+
+<span class="nc" id="L102">            System.out.println();</span>
+        }
+<span class="nc" id="L104">    }</span>
+
+    public boolean updateBoard(int row, int col){
+
+<span class="nc bnc" id="L108" title="All 4 branches missed.">        if(board[row][col].getNumOfMinesNearby() == 0 &amp;&amp; !board[row][col].getIsFlag()){</span>
+<span class="nc" id="L109">            zeroUpdate(row,col);</span>
+        }
+
+<span class="nc" id="L112">        board[row][col].setIsHidden(false);</span>
+<span class="nc" id="L113">        print();</span>
+
+<span class="nc bnc" id="L115" title="All 6 branches missed.">        if (board[row][col].isMine &amp;&amp; !board[row][col].getIsHidden() &amp;&amp; !board[row][col].getIsFlag()){</span>
+<span class="nc" id="L116">            game.loseGame(1);</span>
+<span class="nc" id="L117">            return false;</span>
+        }
+<span class="nc" id="L119">        return true;</span>
+    }
+
+    public void nearbyMineCheck(int r, int c){
+
+<span class="nc" id="L124">        int mines = 0;</span>
+
+<span class="nc bnc" id="L126" title="All 4 branches missed.">        if(r-1 &gt;= 0 &amp;&amp; c-1 &gt;= 0){</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if(board[r-1][c-1].isMine){ //NW</span>
+<span class="nc" id="L128">                mines++;</span>
+            }
+        }
+
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if(r-1 &gt;= 0){</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">            if(board[r-1][c].isMine){ // N</span>
+<span class="nc" id="L134">                mines++;</span>
+            }
+        }
+
+<span class="nc bnc" id="L138" title="All 4 branches missed.">        if(r-1 &gt;= 0 &amp;&amp; c+1 &lt; getSize()){</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">            if(board[r-1][c+1].isMine){ // NE</span>
+<span class="nc" id="L140">                mines++;</span>
+            }
+        }
+
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        if(c-1 &gt;= 0){</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            if(board[r][c-1].isMine){ // W</span>
+<span class="nc" id="L146">                mines++;</span>
+            }
+        }
+
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if(c+1 &lt; getSize()){</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            if(board[r][c+1].isMine){ // E</span>
+<span class="nc" id="L152">                mines++;</span>
+            }
+        }
+
+<span class="nc bnc" id="L156" title="All 4 branches missed.">        if(r+1 &lt; getSize() &amp;&amp; c-1 &gt;= 0){</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">            if(board[r+1][c-1].isMine){ // SW</span>
+<span class="nc" id="L158">                mines++;</span>
+            }
+        }
+
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        if(r + 1 &lt; getSize()){</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">            if(board[r+1][c].isMine){ // S</span>
+<span class="nc" id="L164">                mines++;</span>
+            }
+        }
+
+<span class="nc bnc" id="L168" title="All 4 branches missed.">        if(r+1 &lt; getSize() &amp;&amp; c+1 &lt; getSize()){</span>
+
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            if(board[r+1][c+1].isMine){ // SE</span>
+<span class="nc" id="L171">                mines++;</span>
+            }
+        }
+
+<span class="nc" id="L175">        board[r][c].setNumOfMinesNearby(mines);</span>
+<span class="nc" id="L176">    }</span>
+
+    public void nearbyMineUpdate(){
+
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        for (int i = 0; i &lt; board.length; i++)</span>
+        {
+<span class="nc bnc" id="L182" title="All 2 branches missed.">            for (int j = 0; j &lt; board[i].length; j++)</span>
+            {
+<span class="nc" id="L184">                    nearbyMineCheck(i,j);</span>
+            }
+        }
+<span class="nc" id="L187">    }</span>
+
+    public void zeroUpdate(int r, int c){
+
+<span class="nc bnc" id="L191" title="All 4 branches missed.">        if(r-1 &gt;= 0 &amp;&amp; c-1 &gt;= 0){</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">            if(!board[r-1][c-1].isMine){ //NW</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">                if(board[r-1][c-1].getIsHidden()){</span>
+<span class="nc" id="L194">                    board[r-1][c-1].setIsHidden(false);</span>
+<span class="nc" id="L195">                    zeroUpdate(r-1,c-1);</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        if(r-1 &gt;= 0){</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            if(!board[r-1][c].isMine){ // N</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">                if(board[r-1][c].getIsHidden()){</span>
+<span class="nc" id="L203">                    board[r-1][c].setIsHidden(false);</span>
+<span class="nc" id="L204">                    zeroUpdate(r-1,c);</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L209" title="All 4 branches missed.">        if(r-1 &gt;= 0 &amp;&amp; c+1 &lt; getSize()){</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">            if(!board[r-1][c+1].isMine){ // NE</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                if(board[r-1][c+1].getIsHidden()){</span>
+<span class="nc" id="L212">                    board[r-1][c+1].setIsHidden(false);</span>
+<span class="nc" id="L213">                    zeroUpdate(r-1,c+1);</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        if(c-1 &gt;= 0){</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            if(!board[r][c-1].isMine){ // W</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">                if(board[r][c-1].getIsHidden()){</span>
+<span class="nc" id="L221">                    board[r][c-1].setIsHidden(false);</span>
+<span class="nc" id="L222">                    zeroUpdate(r,c-1);</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L227" title="All 2 branches missed.">        if(c+1 &lt; getSize()){</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">            if(!board[r][c+1].isMine){ // E</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">                if(board[r][c+1].getIsHidden()){</span>
+<span class="nc" id="L230">                    board[r][c+1].setIsHidden(false);</span>
+<span class="nc" id="L231">                    zeroUpdate(r,c+1);</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L236" title="All 4 branches missed.">        if(r+1 &lt; getSize() &amp;&amp; c-1 &gt;= 0){</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">            if(!board[r+1][c-1].isMine){ // SW</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">                if(board[r+1][c-1].getIsHidden()){</span>
+<span class="nc" id="L239">                    board[r+1][c-1].setIsHidden(false);</span>
+<span class="nc" id="L240">                    zeroUpdate(r+1,c-1);</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        if(r + 1 &lt; getSize()){</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">            if(!board[r+1][c].isMine){ // S</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">                if(board[r+1][c].getIsHidden()){</span>
+<span class="nc" id="L248">                    board[r+1][c].setIsHidden(false);</span>
+<span class="nc" id="L249">                    zeroUpdate(r+1,c);</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L254" title="All 4 branches missed.">        if(r+1 &lt; getSize() &amp;&amp; c+1 &lt; getSize()){</span>
+
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            if(!board[r+1][c+1].isMine){ // SE</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">                if(board[r+1][c+1].getIsHidden()){</span>
+<span class="nc" id="L258">                    board[r+1][c+1].setIsHidden(false);</span>
+<span class="nc" id="L259">                    zeroUpdate(r+1,c+1);</span>
+                }
+            }
+        }
+
+<span class="nc" id="L264">    }</span>
+
+    public boolean placeFlag(int r, int c){
+
+<span class="nc" id="L268">        board[r][c].setIsFlag(true);</span>
+<span class="nc" id="L269">        board[r][c].setState(&quot;F&quot;);</span>
+
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        if(board[r][c].getIsMine()){</span>
+<span class="nc" id="L272">            game.setCorrectFlags(game.getCorrectFlags() + 1);</span>
+        }
+        else{
+<span class="nc" id="L275">            game.incorrectFlags++;</span>
+        }
+
+<span class="nc" id="L278">        updateBoard(r,c);</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        if(game.getCorrectFlags()== getNumOfMines()){</span>
+<span class="nc" id="L280">            game.winGame();</span>
+<span class="nc" id="L281">            return false;</span>
+        }
+
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        if(game.incorrectFlags &gt; 0){</span>
+<span class="nc" id="L285">            game.loseGame(2);</span>
+<span class="nc" id="L286">            return false;</span>
+        }
+
+<span class="nc" id="L289">        return true;</span>
+
+    }
+
+    public int getNumOfMines() {
+<span class="nc" id="L294">        return numOfMines;</span>
+    }
+
+    public int getSize(){
+<span class="nc" id="L298">        return size;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

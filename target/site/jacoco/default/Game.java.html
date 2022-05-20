@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Minesweeper</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">import ui.UserIO;
+import ui.UserIOImpl;
+
+public class Game {
+
+<span class="nc" id="L6">    final UserIO io = new UserIOImpl();</span>
+
+    private int gameStatus;
+
+    private int correctFlags;
+<span class="nc" id="L11">    public int incorrectFlags = 0;</span>
+    Board board;
+
+<span class="nc" id="L14">    public Game() {</span>
+<span class="nc" id="L15">    }</span>
+
+    public int getCorrectFlags() {
+<span class="nc" id="L18">        return correctFlags;</span>
+    }
+
+    public void setCorrectFlags(int correctFlags) {
+<span class="nc" id="L22">        this.correctFlags = correctFlags;</span>
+<span class="nc" id="L23">    }</span>
+
+    public int getGameStatus(){
+<span class="nc" id="L26">        return gameStatus;</span>
+    }
+
+    public void setGameStatus(int gameStatus){
+<span class="nc" id="L30">        this.gameStatus = gameStatus;</span>
+<span class="nc" id="L31">    }</span>
+
+    public void start(){
+
+<span class="nc" id="L35">        io.print(&quot;Welcome to Minesweeper&quot;);</span>
+<span class="nc" id="L36">        io.print(&quot;&quot;);</span>
+
+<span class="nc" id="L38">        io.print(&quot;The aim of the game is to avoid any hidden mines!&quot;);</span>
+<span class="nc" id="L39">        io.print(&quot;&quot;);</span>
+
+<span class="nc" id="L41">        io.print(&quot;To win the game, you must successfully place a flag all the mines&quot;);</span>
+<span class="nc" id="L42">        io.print(&quot;&quot;);</span>
+
+<span class="nc" id="L44">        int difficulty = io.readInt(&quot;What difficulty would you like to play on? 1: Beginner, 2:Intermediate or 3:expert&quot;, 1,3);</span>
+<span class="nc" id="L45">        io.print(&quot;&quot;);</span>
+
+<span class="nc" id="L47">        board = new Board(difficulty);</span>
+
+<span class="nc" id="L49">        io.print(&quot;This board has &quot; + board.getNumOfMines() + &quot; mines! Avoid them at all costs!&quot;);</span>
+
+<span class="nc" id="L51">        setGameStatus(1);</span>
+<span class="nc" id="L52">        io.print(&quot;&quot;);</span>
+<span class="nc" id="L53">        onGoing();</span>
+<span class="nc" id="L54">    }</span>
+
+    public void onGoing(){
+
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        while(getGameStatus() == 1){</span>
+
+<span class="nc" id="L60">            io.print(&quot;Would you like to place a flag?&quot;);</span>
+<span class="nc" id="L61">            int in = io.readInt(&quot;Please type 1 for yes or 2 for no:&quot;, 1,2);</span>
+
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            if(in == 1){</span>
+
+<span class="nc" id="L65">                int fr = io.readInt(&quot;Input the row number of the tile you would like to place a flag on&quot;, 1, board.getSize()) -1;</span>
+<span class="nc" id="L66">                int fc = io.readInt(&quot;Input the column number of the tile you would like to place a flag on&quot;, 1, board.getSize()) -1;</span>
+
+<span class="nc" id="L68">                boolean status = board.placeFlag(fr, fc);</span>
+
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                if(!status){</span>
+<span class="nc" id="L71">                    setGameStatus(0);</span>
+                }
+
+<span class="nc" id="L74">            }</span>
+            else{
+<span class="nc" id="L76">                io.print(&quot;Which tile would you like to unveil?&quot;);</span>
+<span class="nc" id="L77">                int r = io.readInt(&quot;Input the row number of the tile you would like to unveil&quot;, 1, board.getSize()) -1;</span>
+<span class="nc" id="L78">                int c = io.readInt(&quot;Input the column number of the tile you would like to unveil&quot;, 1, board.getSize()) -1;</span>
+
+<span class="nc" id="L80">                boolean status = board.updateBoard(r,c);</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                if(!status){</span>
+<span class="nc" id="L83">                    setGameStatus(0);</span>
+                }
+
+            }
+<span class="nc" id="L87">        }</span>
+<span class="nc" id="L88">    }</span>
+
+    public void loseGame(int reason){
+
+<span class="nc bnc" id="L92" title="All 3 branches missed.">        switch (reason){</span>
+            case 1:
+<span class="nc" id="L94">                io.print(&quot;Oh no, you have found the bomb&quot;);</span>
+<span class="nc" id="L95">                io.print(&quot;You are a LOSER&quot;);</span>
+<span class="nc" id="L96">                break;</span>
+            case 2:
+<span class="nc" id="L98">                io.print(&quot;Oh no, you have flagged an incorrect tile&quot;);</span>
+<span class="nc" id="L99">                io.print(&quot;You are a LOSER&quot;);</span>
+                break;
+        }
+<span class="nc" id="L102">    }</span>
+
+    public void winGame(){
+<span class="nc" id="L105">        io.print(&quot;&quot;);</span>
+<span class="nc" id="L106">        io.print(&quot;Well done you have successfully flagged all the bombs&quot;);</span>
+<span class="nc" id="L107">        io.print(&quot;That means ...&quot;);</span>
+<span class="nc" id="L108">        io.print(&quot;You're the BOMB&quot;);</span>
+<span class="nc" id="L109">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

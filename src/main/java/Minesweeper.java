@@ -5,9 +5,6 @@ public class Minesweeper {
         Game game = new Game();
         game.start();
 
-
-
-
     }
 }
 
