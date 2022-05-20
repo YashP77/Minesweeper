@@ -8,58 +8,58 @@
     int numOfMinesNearby;
 
     // Constructor
-<span class="nc" id="L11">    public Tile(boolean isMine, boolean isHidden){</span>
-<span class="nc" id="L12">        this.isMine = isMine;</span>
-<span class="nc" id="L13">        this.isHidden = isHidden;</span>
-<span class="nc" id="L14">        checkState();</span>
-<span class="nc" id="L15">    }</span>
+<span class="fc" id="L11">    public Tile(boolean isMine, boolean isHidden){</span>
+<span class="fc" id="L12">        this.isMine = isMine;</span>
+<span class="fc" id="L13">        this.isHidden = isHidden;</span>
+<span class="fc" id="L14">        checkState();</span>
+<span class="fc" id="L15">    }</span>
 
     // Methods
     public void checkState(){
-<span class="nc bnc" id="L19" title="All 2 branches missed.">        if(isHidden){</span>
-<span class="nc" id="L20">            setState(&quot;-&quot;);</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if(isHidden){</span>
+<span class="fc" id="L20">            setState(&quot;-&quot;);</span>
         }
 
-<span class="nc bnc" id="L23" title="All 2 branches missed.">        if(isMine){</span>
-<span class="nc" id="L24">            setState(&quot;*&quot;);</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if(isMine){</span>
+<span class="fc" id="L24">            setState(&quot;*&quot;);</span>
         }
 
-<span class="nc bnc" id="L27" title="All 2 branches missed.">        if(isFlag){</span>
-<span class="nc" id="L28">            setState(&quot;F&quot;);</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if(isFlag){</span>
+<span class="fc" id="L28">            setState(&quot;F&quot;);</span>
         }
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L30">    }</span>
 
     public void setState(String state) {
-<span class="nc" id="L33">        this.state = state;</span>
-<span class="nc" id="L34">    }</span>
+<span class="fc" id="L33">        this.state = state;</span>
+<span class="fc" id="L34">    }</span>
 
     public boolean getIsMine() {
-<span class="nc" id="L37">        return isMine;</span>
+<span class="fc" id="L37">        return isMine;</span>
     }
 
     public boolean getIsHidden() {
-<span class="nc" id="L41">        return isHidden;</span>
+<span class="fc" id="L41">        return isHidden;</span>
     }
 
     public void setIsHidden(boolean hidden) {
-<span class="nc" id="L45">        isHidden = hidden;</span>
-<span class="nc" id="L46">    }</span>
+<span class="fc" id="L45">        isHidden = hidden;</span>
+<span class="fc" id="L46">    }</span>
 
     public boolean getIsFlag(){
-<span class="nc" id="L49">        return isFlag;</span>
+<span class="fc" id="L49">        return isFlag;</span>
     }
 
     public void setIsFlag(boolean isFlag){
-<span class="nc" id="L53">        this.isFlag = isFlag;</span>
-<span class="nc" id="L54">    }</span>
+<span class="fc" id="L53">        this.isFlag = isFlag;</span>
+<span class="fc" id="L54">    }</span>
 
     public int getNumOfMinesNearby() {
-<span class="nc" id="L57">        return numOfMinesNearby;</span>
+<span class="fc" id="L57">        return numOfMinesNearby;</span>
     }
 
     public void setNumOfMinesNearby(int numOfMinesNearby) {
-<span class="nc" id="L61">        this.numOfMinesNearby = numOfMinesNearby;</span>
-<span class="nc" id="L62">    }</span>
+<span class="fc" id="L61">        this.numOfMinesNearby = numOfMinesNearby;</span>
+<span class="fc" id="L62">    }</span>
 
 
 }

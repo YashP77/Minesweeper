@@ -85,7 +85,7 @@ public class Board {
 
                 if(!board[i][j].isHidden){
 
-                    if (board[i][j].state == "-"){
+                    if (board[i][j].state.equals("-")){
                         System.out.print(board[i][j].getNumOfMinesNearby() + "  ");
                     }
                     else{

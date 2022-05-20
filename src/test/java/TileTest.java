@@ -1,12 +1,11 @@
-import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TileTest {
+public class TileTest {
 
     @Test
-    void checkState() {
+    public void testCheckState() {
 
         // Arrange
         Tile mineHiddenTile = new Tile(true, true);
@@ -25,14 +24,14 @@ class TileTest {
         String result3 = flagTile.state;
 
         // Assert
-        Assert.assertEquals("Tile is the correct state", "*", result);
-        Assert.assertEquals("Tile is the correct state", "-", result2);
-        Assert.assertEquals("Tile is the correct state", "F", result3);
+        assertEquals("*", result, "Tile is the correct state");
+        assertEquals("-", result2, "Tile is the correct state");
+        assertEquals("F", result3, "Tile is the correct state");
 
     }
 
     @Test
-    void setState() {
+    public void testSetState() {
 
         // Arrange
         Tile tile = new Tile(false,false);
@@ -41,12 +40,12 @@ class TileTest {
         tile.setState("*");
 
         // Assert
-        Assert.assertEquals("Tile is set to the correct state", "*", tile.state);
+        assertEquals("*", tile.state, "Tile is set to the correct state");
 
     }
 
     @Test
-    void getIsMine() {
+    public void testGetIsMine() {
 
         // Arrange
         Tile tile = new Tile(true,false);
@@ -56,12 +55,12 @@ class TileTest {
 
 
         // Assert
-        Assert.assertEquals("Tile returns right value", true, result);
+        assertEquals(true, result, "Tile returns right value");
 
     }
 
     @Test
-    void getIsHidden() {
+    public void testGetIsHidden() {
 
         // Arrange
         Tile tile = new Tile(false,true);
@@ -71,12 +70,12 @@ class TileTest {
         boolean result = tile.getIsHidden();
 
         // Assert
-        Assert.assertEquals("Tile returns right value", true, result);
+        assertEquals(true, result, "Tile returns right value");
 
     }
 
     @Test
-    void setIsHidden() {
+    public void testSetIsHidden() {
 
         // Arrange
         Tile tile = new Tile(false,false);
@@ -85,13 +84,13 @@ class TileTest {
         tile.setIsHidden(true);
 
         // Assert
-        Assert.assertEquals("Tile is set to the correct state", true, tile.getIsHidden());
+        assertEquals(true, tile.getIsHidden(), "Tile is set to the correct state");
 
 
     }
 
     @Test
-    void getIsFlag() {
+    public void testGetIsFlag() {
 
         // Arrange
         Tile tile = new Tile(false,true);
@@ -102,12 +101,12 @@ class TileTest {
         boolean result = tile.getIsFlag();
 
         // Assert
-        Assert.assertEquals("Tile returns right value", true, result);
+        assertEquals(true, result, "Tile returns right value");
 
     }
 
     @Test
-    void setIsFlag() {
+    public void testSetIsFlag() {
 
         // Arrange
         Tile tile = new Tile(false,true);
@@ -117,13 +116,13 @@ class TileTest {
         tile.setIsFlag(true);
 
         // Assert
-        Assert.assertEquals("Tile returns right value", true, tile.getIsFlag());
+        assertEquals(true, tile.getIsFlag(), "Tile returns right value");
 
 
     }
 
     @Test
-    void getNumOfMinesNearby() {
+    public void testGetNumOfMinesNearby() {
 
         // Arrange
         Tile tile = new Tile(false,true);
@@ -134,12 +133,12 @@ class TileTest {
         int result = tile.getNumOfMinesNearby();
 
         // Assert
-        Assert.assertEquals("Tile returns right value", 3, result);
+        assertEquals(3, result, "Tile returns right value");
 
     }
 
     @Test
-    void setNumOfMinesNearby() {
+    public void testSetNumOfMinesNearby() {
 
         // Arrange
         Tile tile = new Tile(false,true);
@@ -149,7 +148,7 @@ class TileTest {
         tile.setNumOfMinesNearby(5);
 
         // Assert
-        Assert.assertEquals("Tile returns right value", 5, tile.getNumOfMinesNearby());
+        assertEquals(5, tile.getNumOfMinesNearby(),"Tile returns right value");
 
     }
 }
